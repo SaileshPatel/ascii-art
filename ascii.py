@@ -38,8 +38,9 @@ def to_ascii(im_name):
 			else:
 				list.append(3)
 		out_list.append(list)
+	return out_list
 
-
+def print_ascii(out_list):
 	for i in out_list:
 		for j in i:
 			if j == 3:
@@ -54,4 +55,6 @@ def to_ascii(im_name):
 
 im_name = clean_file_input()
 if im_name:
-	to-ascii(im_name)
+	ascii = to-ascii(im_name)
+
+print_ascii(ascii)
