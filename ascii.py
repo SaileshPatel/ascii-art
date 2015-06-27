@@ -53,8 +53,23 @@ def print_ascii(out_list):
 				print "#",
 		print
 
+def ascii_to_string(out_list):
+	s = ""
+	for list in out_list:
+		for item in list:
+			if item == 3:
+				s += " "
+			elif item == 2:
+				s += "."
+			elif item == 1:
+				s += "%"
+			elif item == 0:
+				s += "#"
+		s += "\n"
+	return s
+
 im_name = clean_file_input()
 if im_name:
-	ascii = to-ascii(im_name, 60)
+	ascii = to_ascii(im_name, 60)
 
-print_ascii(ascii)
+
