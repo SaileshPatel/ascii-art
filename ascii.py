@@ -15,12 +15,12 @@ def clean_file_input():
 		else:
 			print "Invalid filename"
 
-def to_ascii(im_name):
+def to_ascii(im_name, size):
 	out_list = []
 	imag = Image.open(im_name)
 	old_w, old_h = imag.size
 	ratio = float(old_w) / float(old_h)
-	imag = imag.resize((int(ratio*60), 60))
+	imag = imag.resize((int(ratio*size), size))
 	conv = imag.convert("RGB")
 	pix = conv.load()
 	width, height = conv.size
@@ -55,6 +55,6 @@ def print_ascii(out_list):
 
 im_name = clean_file_input()
 if im_name:
-	ascii = to-ascii(im_name)
+	ascii = to-ascii(im_name, 60)
 
 print_ascii(ascii)
