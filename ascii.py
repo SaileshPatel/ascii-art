@@ -70,6 +70,8 @@ def ascii_to_string(out_list):
 
 im_name = clean_file_input()
 if im_name:
-	ascii = to_ascii(im_name, 60)
+	ascii = to_ascii(im_name, 160)
+   
+print_ascii(ascii)
 
 
