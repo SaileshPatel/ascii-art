@@ -52,21 +52,7 @@ def print_ascii(out_list):
             print(char, end="")
         print()
 
-def ascii_to_string(out_list):
-    s = ""
-    for appendList in out_list:
-        for item in appendList:
-            if item == 3:
-                s += " "
-            elif item == 2:
-                s += "."
-            elif item == 1:
-                s += "%"
-            elif item == 0:
-                s += "#"
-        s += "\n"
-    return s
-
+is_py2 = False
 if sys.version_info <= (3, 0):
     is_py2 = True
 im_name = clean_file_input(is_py2)
