@@ -1,4 +1,4 @@
-Image to ASCII art converter.
+# Image to ASCII art converter.
 
 Uses PIL which comes installed by default with some python installations, otherwise is available on the net.
 
