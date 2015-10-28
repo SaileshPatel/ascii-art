@@ -24,9 +24,9 @@ def to_ascii(im_name, size):
 	conv = imag.convert("RGB")
 	pix = conv.load()
 	width, height = conv.size
-	for Y in list(range(0, height)):
+	for Y in range(0, height):
 		appendList = []
-		for X in list(range(0, width)):
+		for X in range(0, width):
 			R, G, B = pix[X, Y]
 			avg = (R + G + B)/3
 			if avg < 60:
