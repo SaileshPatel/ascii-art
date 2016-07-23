@@ -3,26 +3,14 @@ from PIL import Image
 import os
 import sys
 
-def clean_file_input(is_py2):
-    while True:
-        ext_list = ["jpg", "jpeg", "png", "bmp"]
-        if is_py2:
-            name = raw_input("File Name > ")
-        else:
-            name = input("File Name > ")
-        try:
-            ext = name.split('.')[1]
-        except:
-            print("File needs extension")
-            return False
-        if name in os.listdir(".") and ext in ext_list:
-            return name
-        else:
-            print("Invalid filename")
+help_msg = """Usage:
+    python ascii.py [image_name] [vertical_size_px]
+    """
+
+shades = ["#", "%", ".", " "]
 
 def to_ascii(im_name, size):
-    shades = ["#", "%", ".", " "]
-    out_list = []
+    lines = []
     imag = Image.open(im_name)
     old_w, old_h = imag.size
     ratio = float(old_w) / float(old_h)
@@ -30,33 +18,22 @@ def to_ascii(im_name, size):
     conv = imag.convert("RGB")
     pix = conv.load()
     width, height = conv.size
-    for Y in range(0, height):
-        appendList = []
-        for X in range(0, width):
-            R, G, B = pix[X, Y]
-            avg = (R + G + B)/3
-            if avg < 60:
-                appendList.append(shades[0])
-            elif avg < 120:
-                appendList.append(shades[1])
-            elif avg < 180:
-                appendList.append(shades[2])
-            else:
-                appendList.append(shades[3])
-        out_list.append(appendList)
-    return out_list
+    for y in range(0, height):
+        tmp = []
+        for x in range(0, width):
+            avg = sum(pix[x, y])/3
+            idx = 3 - int((float(avg)/255)*4)
+            # average aspect ratio of fonts is ~0.5
+            tmp.append(shades[idx])
+            tmp.append(shades[idx])
+        lines.append(''.join(tmp))
+    return lines
 
-def print_ascii(out_list):
-    for row in out_list:
-        for char in row:
-            print(char, end="")
-        print()
-
-is_py2 = False
-if sys.version_info <= (3, 0):
-    is_py2 = True
-im_name = clean_file_input(is_py2)
-if im_name:
-    ascii = to_ascii(im_name, 160)
-   
-print_ascii(ascii)
+if __name__ == "__main__":
+    try:
+        a = to_ascii(sys.argv[1], int(sys.argv[2]))
+        for line in a:
+            print(line)
+    except Exception as e:
+        print(help_msg)
+        print(e)
